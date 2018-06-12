@@ -28,12 +28,16 @@
     <main>
         <h2>Novo teste</h2>
 
-        <label for="nome">Nome</label>
-        <input id="nome" type="text" autofocus />
+        <div id="mensagem" class="ocultar"></div>
 
-        <button id="btnSalvar" onclick="teste.salvar()">Salvar</button>
+        <label for="nome">Nome *</label>
+        <input id="nome" type="text" autofocus required />
+        <small><i>(obrigatório)</i></small>
 
-        <button id="btnLimpar" onclick="teste.limparCampos()">Limpar</button>
+        <div>
+            <button id="btnSalvar" onclick="teste.salvar()">Salvar</button>
+            <button id="btnLimpar" onclick="teste.limparCampos()">Limpar</button>
+        </div>
     </main>
 
     <section>

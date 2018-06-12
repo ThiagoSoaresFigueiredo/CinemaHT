@@ -28,26 +28,40 @@ class Teste {
                 this.limparCampos();
             }
         } else { // SALVAR
-            if (window.confirm("Tem certeza que deseja salvar os dados informado ?")) {
-                let obj = {};
-                obj.id = this.id;
-                obj.codigo = this.id + 1;
-                obj.nome = document.getElementById("nome").value;
+            let nome = document.getElementById("nome").value;
+            let msg = "";
 
-                this.testes.push(obj);
+            if (nome == "") {
+                msg += "Nome é obrigatório \n";
+            }
 
-                this.listar();
-                this.limparCampos();
+            if (msg == "") {
+                if (window.confirm("Tem certeza que deseja salvar os dados informado ?")) {
+                    let obj = {};
+                    obj.id = this.id;
+                    obj.codigo = this.id + 1;
+                    obj.nome = nome;
 
-                this.qtd++;
-                this.id++;
+                    this.testes.push(obj);
 
-                window.alert("Registro salvo com sucesso");
+                    this.listar();
+                    this.limparCampos();
+                    document.getElementById("mensagem").classList.remove("mostrar");
+
+                    this.qtd++;
+                    this.id++;
+
+                    window.alert("Registro salvo com sucesso");
+                } else {
+                    window.alert("Inclusão cancelada com sucesso. Nenhum registro foi salvo no sistema");
+
+                    this.listar();
+                    this.limparCampos();
+                }
             } else {
-                window.alert("Inclusão cancelada com sucesso. Nenhum registro foi salvo no sistema");
-
-                this.listar();
-                this.limparCampos();
+                let divMensagem = document.getElementById("mensagem");
+                divMensagem.innerText = msg;
+                divMensagem.classList.add("mostrar");
             }
         }
     }
@@ -111,6 +125,7 @@ class Teste {
 
     limparCampos() {
         document.getElementById("nome").value = "";
+        document.getElementById("mensagem").classList.remove("mostrar");
 
         if (this.isEdicao) {
             document.getElementById("btnSalvar").innerText = "Salvar";
