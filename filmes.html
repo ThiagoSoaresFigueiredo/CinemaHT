@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Filmes</title>
+
+    <link rel="stylesheet" href="css/filmes.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/modelo/Filmes.js"></script>
+</head>
+
+<body>
+    <h1>Cinema HT</h1>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="home.html">Home</a>
+            </li>
+            <li>
+                <a href="home.html">Reservas</a>
+            </li>
+            <li>
+                <a href="home.html">Sessões</a>
+            </li>
+            <li>
+                <a href="home.html">Salas</a>
+            </li>
+            <li>
+                <a href="clientes.html">Clientes</a>
+            </li>
+            <li>
+                <a href="filmes.html">Filmes</a>
+            </li>
+            <li>
+                <a href="home.html">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1>Gerência de Filmes</h1>
+
+    <div id="mensagem" class="ocultar"></div>
+
+    <div>
+        <label for="nome">Nome do filme:</label>
+        <input id="nome" type="text" placeholder="Nome do filme" autofocus />
+    </div>
+    <div>
+        <label for="duracao">Duração:</label>
+        <input id="duracao" type="number" placeholder="Duração em minutos" />
+    </div>
+    <div>
+        <label for="classificacao">Classificação etária:</label>
+        <input id="classificacao" type="number" placeholder="Idade mínima" />
+    </div>
+    <div>
+        <label for="genero">Gênero:</label>
+        <select id="genero" size="1">
+            <option value="" selected>Selecione um gênero</option>
+            <option value="acao">Ação</option>
+            <option value="adulto">Adulto</option>
+            <option value="animacao">Animação</option>
+            <option value="autobiografia">Autobiografia</option>
+            <option value="aventura">Aventura</option>
+            <option value="comedia">Comédia</option>
+            <option value="danca">Dança</option>
+            <option value="desenho">Desenho</option>
+            <option value="documentario">Documentário</option>
+            <option value="drama">Drama</option>
+            <option value="espionagem">Espionagem</option>
+            <option value="fantasia">Fantasia</option>
+            <option value="faroeste">Faroeste</option>
+            <option value="ficcao">Ficção</option>
+            <option value="guerra">Guerra</option>
+            <option value="musical">Musical</option>
+            <option value="policial">Policial</option>
+            <option value="romance">Romance</option>
+            <option value="seriado">Seriado</option>
+            <option value="suspense">Suspense</option>
+            <option value="terror">Terror</option>
+        </select>
+    </div>
+    <div>
+        <label for="sinopse">Sinopse:</label>
+        <textarea id="sinopse" cols="100" rows="10"></textarea>
+    </div>
+
+    <button id="btnSalvar" onclick="filme.salvar()">Salvar</button>
+    <button id="btnLimpar" onclick="filme.limpar()">Limpar</button>
+
+    <div>
+        <h2>Filmes Cadastrados
+            <span id="qtde">(0)</span>
+        </h2>
+    </div>
+
+    <span>NOME</span>
+    <span>DURAÇÃO</span>
+
+    <div id="lista"></div>
+</body>
+
+</html>

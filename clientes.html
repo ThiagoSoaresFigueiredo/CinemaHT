@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Clientes</title>
+
+    <script src="js/modelo/Clientes.js"></script>
+
+    <link rel="stylesheet" href="css/clientes.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Cinema HT</h1>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="home.html">Home</a>
+            </li>
+            <li>
+                <a href="home.html">Reservas</a>
+            </li>
+            <li>
+                <a href="home.html">Sessões</a>
+            </li>
+            <li>
+                <a href="home.html">Salas</a>
+            </li>
+            <li>
+                <a href="clientes.html">Clientes</a>
+            </li>
+            <li>
+                <a href="filmes.html">Filmes</a>
+            </li>
+            <li>
+                <a href="home.html">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1>Gerência de Clientes</h1>
+
+    <div id="mensagem" class="ocultar"></div>
+
+    <div>
+        <label for="nomeC">Nome</label>
+        <input id="nomeC" type="text" autofocus placeholder="Nome do cliente" />
+    </div>
+    <div>
+        <label for="idadeC">Idade</label>
+        <input id="idadeC" type="number" placeholder="Idade do cliente" />
+    </div>
+    <div>
+        <label for="emailC">Email</label>
+        <input id="emailC" type="email" placeholder="Email do cliente" />
+    </div>
+
+    <button id="btnSalvar" onclick="cli.salvar()">Salvar</button>
+    <button id="btnLimpar" onclick="cli.limpar()">Limpar</button>
+
+    <div>
+        <h2>Clientes Cadastrados
+            <span id="qtde">(0)</span>
+        </h2>
+    </div>
+
+    <span>NOME</span>
+    <span>IDADE</span>
+    <span>EMAIL</span>
+
+    <div id="lista"></div>
+</body>
+
+</html>
