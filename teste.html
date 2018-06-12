@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Testes</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/modelo/teste.js"></script>
 </head>
@@ -31,8 +31,10 @@
         <div id="mensagem" class="ocultar"></div>
 
         <label for="nome">Nome *</label>
-        <input id="nome" type="text" autofocus required />
-        <small><i>(obrigatório)</i></small>
+        <input id="nome" type="text" placeholder="Digite seu nome" autofocus required />
+        <small>
+            <i>(obrigatório)</i>
+        </small>
 
         <div>
             <button id="btnSalvar" onclick="teste.salvar()">Salvar</button>
@@ -41,14 +43,41 @@
     </main>
 
     <section>
-        <h2>Listagem de Testes</h2>
+        <h2>Listagem de Testes (
+            <small>
+                <i>
+                    <b>
+                        <span id="qtde">0</span>
+                    </b>
+                </i>
+            </small>)
+        </h2>
 
+        <div>
+            <span>
+                <b>Nome</b>
+            </span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span>
+                <b>Opções</b>
+            </span>
+        </div>
         <div id="lista"></div>
     </section>
 
-    <footer>
-        <span>Desenvolvido por Thiago Soares Figueiredo (67)99285-2824</span>
-    </footer>
+    <p>
+        <p>
+            <p>
+                <footer>
+                    <small>
+                        <i>
+                            <span>Desenvolvido por Thiago Soares Figueiredo (67)99285-2824</span>
+                        </i>
+                    </small>
+                </footer>
+            </p>
+        </p>
+    </p>
 </body>
 
 </html>

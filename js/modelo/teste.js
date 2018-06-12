@@ -48,7 +48,6 @@ class Teste {
                     this.limparCampos();
                     document.getElementById("mensagem").classList.remove("mostrar");
 
-                    this.qtd++;
                     this.id++;
 
                     window.alert("Registro salvo com sucesso");
@@ -93,8 +92,12 @@ class Teste {
         let lista = document.getElementById("lista");
         lista.innerText = "";
 
+        this.qtd = 0;
+
         for (let i = 0; i < this.testes.length; i++) {
-            if (this.testes[i]) {
+            if (this.testes[i]) { 
+                this.qtd++;
+
                 let idTemp = this.testes[i].id;
 
                 let registro = document.createElement("div");
@@ -116,11 +119,14 @@ class Teste {
                 imgEditar.setAttribute("onclick", "teste.editar('" + registro.id + "')");
 
                 registro.appendChild(nome);
+                registro.innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;";
                 registro.appendChild(imgExcluir);
                 registro.appendChild(imgEditar);
                 lista.appendChild(registro);
             }
         }
+
+        document.getElementById("qtde").innerText = this.qtd;
     }
 
     limparCampos() {

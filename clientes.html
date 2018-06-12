@@ -48,32 +48,62 @@
     <div id="mensagem" class="ocultar"></div>
 
     <div>
-        <label for="nomeC">Nome</label>
-        <input id="nomeC" type="text" autofocus placeholder="Nome do cliente" />
+        <label for="nome">Nome</label>
+        <input id="nome" type="text"  placeholder="Nome do cliente" autofocus required />
     </div>
     <div>
-        <label for="idadeC">Idade</label>
-        <input id="idadeC" type="number" placeholder="Idade do cliente" />
+        <label for="idade">Idade</label>
+        <input id="idade" type="number" placeholder="Idade do cliente" />
     </div>
     <div>
-        <label for="emailC">Email</label>
-        <input id="emailC" type="email" placeholder="Email do cliente" />
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="Email do cliente" />
     </div>
 
-    <button id="btnSalvar" onclick="cli.salvar()">Salvar</button>
-    <button id="btnLimpar" onclick="cli.limpar()">Limpar</button>
-
     <div>
-        <h2>Clientes Cadastrados
-            <span id="qtde">(0)</span>
+        <button id="btnSalvar" onclick="cliente.salvar()">Salvar</button>
+        <button id="btnLimpar" onclick="cliente.limpar()">Limpar</button>
+    </div>
+
+    <section>
+        <h2>Clientes Cadastrados (
+            <small>
+                <i>
+                    <b>
+                        <span id="qtde">0</span>
+                    </b>
+                </i>
+            </small>)
         </h2>
-    </div>
 
-    <span>NOME</span>
-    <span>IDADE</span>
-    <span>EMAIL</span>
+        <div>
+            <span>
+                <b>Nome</b>
+            </span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span>
+                <b>Idade</b>
+            </span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span>
+                <b>Email</b>
+            </span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span></span>
+        </div>
+        <div id="lista"></div>
+    </section>
 
-    <div id="lista"></div>
+    <p>
+        <hr>
+        <footer style="text-align: center">
+            <small>
+                <i>
+                    <span>Desenvolvido por Thiago Soares Figueiredo (67)99285-2824</span>
+                </i>
+            </small>
+        </footer>
+    </p>
 </body>
 
 </html>
