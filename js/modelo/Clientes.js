@@ -86,7 +86,6 @@ class Cliente {
                     obj.email = email;
 
                     this.clientes.push(obj);
-                    //this.id++;
                     this.nextId++;
 
                     // Salvando no DB

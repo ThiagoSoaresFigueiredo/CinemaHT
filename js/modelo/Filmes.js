@@ -1,150 +1,175 @@
-class Filmes {
+class Filme {
 
     constructor() {
-        this.id = 0;
-        this.qtd = 0;
-        this.idEditar = 0;
+        this.id;
+        this.proximoId;
+        this.qtde = 0;
+        this.filmes;
         this.isEdicao = false;
-        this.filmes = []
-    } // construtor
+        this.idEdicao = 0;
+    } // construtor()
+
+
+
+    // REPOSITORY
+    carregarDados() {
+        let filmesCadastrados = null;
+        filmesCadastrados = JSON.parse(localStorage.getItem("filmes"));
+
+        let proximoId = localStorage.getItem("proximoId");
+        let ultimoId = localStorage.getItem("ultimoId");
+
+        if (filmesCadastrados == null) {
+            this.filmes = [];
+            this.id = 0;
+            this.proximoId = 0;
+        } else {
+            this.filmes = filmesCadastrados;
+            this.id = proximoId;
+            this.proximoId = proximoId;
+        } // else
+
+        this.listar();
+    } // carregarDados()
+
+    salvarDados() {
+        localStorage.setItem("ultimoId", this.id);
+        localStorage.setItem("proximoId", this.proximoId);
+
+        let FilmeJson = JSON.stringify(this.filmes);
+        localStorage.setItem("filmes", FilmeJson);
+    } // salvarDados()
+
+
+
+    // CRUD (CONTROLLER E SERVICE)
 
     salvar() {
-        if (this.isEdicao) {
-            this.isEdicao = false;
-            this.filmes[this.idEditar].nome = document.getElementById("nome").value;
+        if (this.isEdicao) { // EDITAR
+            if (window.confirm("Tem certeza que deseja salvar as alterações realizadas ?")) {
+                this.filmes[this.idEdicao].nome = document.getElementById("nome").value;
+                this.filmes[this.idEdicao].duracao = document.getElementById("duracao").value;
+                this.filmes[this.idEdicao].classificacao = document.getElementById("classificacao").value;
+                this.filmes[this.idEdicao].genero = document.getElementById("genero").value;
+                this.filmes[this.idEdicao].sinopse = document.getElementById("sinopse").value;
 
-            document.getElementById("btnSalvar").innerText = "Salvar";
-            document.getElementById("btnLimpar").innerText = "Limpar";
+                document.getElementById("btnSalvar").innerText = "Salvar";
+                document.getElementById("btnLimpar").innerText = "Limpar";
 
+                this.salvarDados();
 
-            this.montarLista();
+                this.listar();
+                this.limparCampos();
 
-            window.alert("Filme alterado com sucesso");
-
-            this.limpar();
-        } else {
+                window.alert("Filme alterado com sucesso");
+            }
+        } else { // SALVAR
             let nome = document.getElementById("nome").value;
             let duracao = document.getElementById("duracao").value;
             let classificacao = document.getElementById("classificacao").value;
             let genero = document.getElementById("genero").value;
             let sinopse = document.getElementById("sinopse").value;
-
-            let msgValidacao = "";
+            let msg = "";
 
             if (nome == "")
-                msgValidacao += "Nome deve ser informado";
+                msg += "Nome é obrigatório";
 
             if (duracao == "")
-                msgValidacao += "Duração deve ser informada";
+                msg += "Email é obrigatório";
 
             if (classificacao == "")
-                msgValidacao += "Classificação deve ser informada";
+                msg += "Classificação é obrigatória";
 
             if (genero == "")
-                msgValidacao += "Gênero deve ser informado";
+                msg += "Gênero é obrigatório";
 
             if (sinopse == "")
-                msgValidacao += "Sinopse deve ser informada";
+                msg += "Sinopse é obrigatória";
 
-            let f = {
-                id: (this.id + 1),
-                nome: nome,
-                duracao: duracao,
-                classificacao: classificacao,
-                genero: genero,
-                sinopse: sinopse
-            };
+            if (window.confirm("Tem certeza que deseja salvar os dados informados ?")) {
+                this.id = this.proximoId;
 
-            this.filmes.push(f);
-            this.qtd++;
-            this.atualizarQtd();
-            this.montarLista();
-            this.id++;
-            this.limpar();
-            window.alert("Filme salvo com sucesso");
-        }
+                let obj = {};
+                obj.id = this.id;
+                obj.codigo = "fil-" + (this.id + 1);
+                obj.nome = nome;
+                obj.duracao = duracao;
+                obj.classificacao = classificacao;
+                obj.genero = genero;
+                obj.sinopse = sinopse;
+
+                this.filmes.push(obj);
+                this.proximoId++;
+                this.salvarDados();
+                this.listar();
+                this.limparCampos();
+            } // if
+        } // else
     } // salvar()
 
-    montarLista() {
-
-        let lista = document.getElementById("lista");
-        let div = document.createElement("div");
-        let spanNome = document.createElement("span");
-        let spanDuracao = document.createElement("span");
-        let imgExcluir = document.createElement("img");
-        let imgEditar = document.createElement("img");
-
-        if (this.isEdicao) {
-            div.id = this.idEditar;
-        }
-        
-        lista.innerText = "";
-
-        div.innerText = "";
-        div.id = this.id;
-
-        imgExcluir.src = "img/excluir.svg";
-        imgExcluir.title = "Excluir";
-        imgExcluir.classList.add("icone");
-        imgExcluir.setAttribute("onclick", "filme.excluir('" + div.id + "')");
-
-        imgEditar.src = "img/editar.svg";
-        imgEditar.title = "Editar";
-        imgEditar.classList.add("icone");
-        imgEditar.setAttribute("onclick", "filme.editar('" + div.id + "')");
+    listar() {
+        let tabela = document.querySelector("tbody");
+        tabela.innerHTML = "";
+        document.getElementById("mensagem").classList.remove("mostrar");
 
         for (let i = 0; i < this.filmes.length; i++) {
+            this.qtde++;
 
-            spanNome.innerText = this.filmes[i].nome;
-            spanDuracao.innerText = this.filmes[i].duracao;
+            let linha = tabela.insertRow();
+            let colunaNome = linha.insertCell(0);
+            let colunaDuracao = linha.insertCell(1);
+            let colunaEditar = linha.insertCell(2);
+            let colunaExcluir = linha.insertCell(3);
 
-            div.appendChild(spanNome);
-            div.appendChild(spanDuracao);
-            div.appendChild(imgExcluir);
-            div.appendChild(imgEditar);
+            colunaNome.innerText = this.filmes[i].nome;
+            colunaDuracao.innerText = this.filmes[i].duracao;
 
-            lista.appendChild(div);
+            let imgExcluir = document.createElement("img");
+            imgExcluir.src = "img/excluir.svg";
+            imgExcluir.title = "Excluir";
+            imgExcluir.classList.add("icone");
+            imgExcluir.setAttribute("onclick", "filme.excluir('" + i + "')");
+
+            let imgEditar = document.createElement("img");
+            imgEditar.src = "img/editar.svg";
+            imgEditar.title = "Editar";
+            imgEditar.classList.add("icone");
+            imgEditar.setAttribute("onclick", "filme.editar('" + i + "')");
+
+            colunaEditar.appendChild(imgEditar);
+            colunaExcluir.appendChild(imgExcluir);
         }
-    } // montarLista()
+    }
 
-    editar(indice) {
+    editar(id) {
         this.isEdicao = true;
-        this.idEditar = indice;
-        
-        console.log(indice);
-        document.getElementById("nome").value = this.filmes[indice].nome;
-        document.getElementById("duracao").value = this.filmes[indice].duracao;
-        document.getElementById("classificacao").value = this.filmes[indice].classificacao;
-        document.getElementById("genero").value = this.filmes[indice].genero;
-        document.getElementById("sinopse").value = this.filmes[indice].sinopse;
+        this.idEdicao = id;
 
+        document.getElementById("nome").value = this.filmes[id].nome;
+        document.getElementById("duracao").value = this.filmes[id].duracao;
+        document.getElementById("classificacao").value = this.filmes[id].classificacao;
+        document.getElementById("genero").value = this.filmes[id].genero;
+        document.getElementById("sinopse").value = this.filmes[id].sinopse;
 
         document.getElementById("btnSalvar").innerText = "Salvar edição";
         document.getElementById("btnLimpar").innerText = "Cancelar edição";
     } // editar()
 
     excluir(id) {
-        let msgmDeExclusao = "Deseja excluir o seguite filme: "
-            + this.filmes[id].id
-            + " - "
-            + this.filmes[id].nome
-            + " ?";
-
-        if (window.confirm(msgmDeExclusao)) {
-            document.getElementById("lista").removeChild(document.getElementById(id));
-            this.qtd--;
-            this.atualizarQtd();
-            this.limpar();
+        if (window.confirm("Tem certeza que deseja excluir este filme ?")) {
+            this.filmes.splice(id, 1);
+            this.qtde--;
+            this.salvarDados();
+            this.listar();
             window.alert("Filme excluído com sucesso");
+        } else {
+            window.alert("A exclusão foi cancelada com sucesso. Nenhum filme foi excluído");
+
+            this.listar();
         }
     } // excluir()
 
-    atualizarQtd() {
-        let qtde = document.getElementById("qtde");
-        qtde.innerText = "(" + this.qtd + ")";
-    } // atualizarQtd()
-
-    limpar() {
+    limparCampos() {
         document.getElementById("nome").value = "";
         document.getElementById("duracao").value = "";
         document.getElementById("classificacao").value = "";
@@ -152,12 +177,10 @@ class Filmes {
         document.getElementById("sinopse").value = "";
 
         if (this.isEdicao) {
-            document.getElementById("btnSalvar").innerText = "Salvar"
+            document.getElementById("btnSalvar").innerText = "Salvar";
             document.getElementById("btnLimpar").innerText = "Limpar";
+        } // if
+    } // limparCampos()
+} // Fim da classe
 
-            this.isEdicao = false;
-        }
-    } // limpar()
-}
-
-let filme = new Filmes();
+var filme = new Filme();
