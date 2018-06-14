@@ -9,15 +9,17 @@
     <title>Clientes</title>
 
     <script src="js/modelo/Clientes.js"></script>
+    <script src="js/modelo/Utils.js"></script>
 
     <link rel="stylesheet" href="css/clientes.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body onload="cliente.carregarDados()">
-    <h1>Cinema HT</h1>
 
-    <nav>
+    <nav class="centro">
+        <h2 class="centro"><a href="home.html">Cinema HT</a></h2>
+
         <ul>
             <li>
                 <a href="home.html">Home</a>
@@ -43,62 +45,69 @@
         </ul>
     </nav>
 
-    <h1>Gerência de Clientes</h1>
+    <main>
+        <div class="tituloPagina">
+            <h1>Gerência de Clientes</h1>
+        </div>
 
-    <div id="mensagem" class="ocultar"></div>
+        <div>
+            <h2>Novo Cliente</h2>
+        </div>
 
-    <div>
-        <label for="nome">Nome</label>
-        <input id="nome" type="text" placeholder="Nome do cliente" autofocus required />
-    </div>
-    <div>
-        <label for="idade">Idade</label>
-        <input id="idade" type="number" placeholder="Idade do cliente" />
-    </div>
-    <div>
-        <label for="email">Email</label>
-        <input id="email" type="email" placeholder="Email do cliente" />
-    </div>
+        <div id="mensagem" class="ocultarMsg">
+            <img src="img/close-msg.svg" class="imagemMensagem" title="Fechar as mensagens de erro." onclick="fecharMensagem()" />
+            <div id="textoDaMensagem"></div>
+        </div>
 
-    <div>
-        <button id="btnSalvar" onclick="cliente.salvar()">Salvar</button>
-        <button id="btnLimpar" onclick="cliente.limparCampos()">Limpar</button>
-    </div>
+        <div>
+            <label for="nome">Nome: </label>
+            <input id="nome" type="text" placeholder="Nome do cliente" title="Nome do cliente. Campo obrigatório." autofocus required />
+        </div>
+        <div>
+            <label for="idade">Idade: </label>
+            <input id="idade" type="number" title="Idade do cliente. Campo obrigatório." placeholder="Idade do cliente" />
+        </div>
+        <div>
+            <label for="email">Email: </label>
+            <input id="email" type="email" title="Email do cliente. Campo obrigatório." placeholder="Email do cliente" />
+        </div>
 
-    <section>
-        <h2>Clientes Cadastrados (
-            <small>
-                <i>
-                    <b>
-                        <span id="qtde">0</span>
-                    </b>
-                </i>
-            </small>)
-        </h2>
+        <div>
+            <button id="btnSalvar" class="btnSalvar" onclick="cliente.salvar()" title="Salva todos os dados informados do cliente.">Salvar</button>
+            <button id="btnLimpar" class="btnLimpar" onclick="cliente.limparCampos()" title="Limpa todos os campos para nova digitação.">Limpar</button>
+        </div>
 
-        <table id="tdados">
-            <thead>
-                <th>Nome</th>
-                <th>Idade</th>
-                <th>Email</th>
-                <th></th>
-                <th></th>
-            </thead>
-            <tbody id="tbody"></tbody>
+        <section>
+            <div>
+                <h2>Clientes Cadastrados
+                    <span id="qtde"></span>
+                </h2>
+            </div>
 
-        </table>
-    </section>
+            <table id="tdados">
+                <thead>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Email</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </section>
+        </form>
 
-    <p>
-        <hr>
-        <footer style="text-align: center">
-            <small>
-                <i>
-                    <span>Desenvolvido por Thiago Soares Figueiredo (67)99285-2824</span>
-                </i>
-            </small>
-        </footer>
-    </p>
+        <p>
+            <hr>
+            <footer style="text-align: center">
+                <small>
+                    <i>
+                        <span>Desenvolvido por Thiago Soares Figueiredo (67)99285-2824</span>
+                    </i>
+                </small>
+            </footer>
+        </p>
+    </main>
 </body>
 
 </html>

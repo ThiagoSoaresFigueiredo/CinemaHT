@@ -1,3 +1,159 @@
+body {
+    font-family: sans-serif;
+    margin: 0px;
+}
+
+div {
+    padding: 10px;
+    width: 100%;
+}
+
+nav h2 a {
+    padding: 15px;
+    font-size: xx-large;
+    text-shadow: 0px 0px 8px white;
+}
+
+nav {
+    float: left;
+    width: 15%;
+    height: 100%;
+    position: fixed;
+    color: white;
+    background-color: #20B2AA;
+}
+
+nav ul {
+    padding: 15px;
+    padding-top: 0px;
+}
+
+nav li {
+    padding-top: 15px;
+    text-align: left;
+    list-style: none;
+}
+
+nav li:hover {
+    font-size: xx-large;
+}
+
+li a:hover {
+    color: #5F9EA0;
+    text-shadow: 1px 1px 0px gray;
+    font-size: x-large;
+}
+
+nav a {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    font-size: large;
+}
+
+main {
+    float: right;
+    width: 85%;
+    transition: width 1s;
+}
+
+label {
+    text-align: right;
+    font-size: large;
+    font-weight: normal;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="datetime-local"] {
+    width: 50%;
+    border: none;
+    border-bottom: 2px double black;
+    animation: none;
+    margin-left: 10px;
+    position: relative;
+    padding: 5px;
+    outline: none;
+    color: blue;
+    font-weight: 500;
+    font-size: large;
+}
+
+button {
+    border: none;
+    padding: 15px;
+    text-shadow: transparent;
+    font-size: large;
+    font-weight: 600;
+    width: 15%;
+    color: white;
+    border-radius: 2px;
+    margin-top: 10px;
+    outline: none;
+}
+
+button:hover {
+    box-shadow: 0px 0px 10px black;
+}
+
+section h2 {
+    margin-bottom: 0px;
+    margin-top: 40px;
+}
+
+table {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-spacing: 0px;
+}
+
+th {
+    background-color: #008B8B;
+    width: auto;
+    padding: 15px;
+    margin: auto;
+}
+
+tr {
+    font-size: large;
+}
+
+td {
+    color: #696969;
+    padding: 5px;
+}
+
+.corSim {
+    background-color: #40E0D0;
+}
+
+#qtde {
+    margin-left: 5px;
+    font-size: small;
+    font-family: monospace;
+    color: blue;
+}
+
+.btnSalvar {
+    background-color: #008B8B;
+}
+
+.btnLimpar {
+    background-color: #008B8B;
+}
+
+.tituloPagina {
+    width: 100%;
+    color: white;
+    background-color: #008B8B;
+}
+
+.centro {
+    text-align: center;
+}
+
 .icone {
     width: 25px;
     height: 25px;
@@ -10,15 +166,56 @@
     cursor: pointer;
 }
 
-.ocultar {
+.ocultarMsg {
     display: none;
 }
 
-.mostrar {
+#mensagem {
+    margin-left: 10px;
+}
+
+.mostrarMsg {
+    width: 30%;
+    font-family: sans-serif;
+    font-weight: 600;
     display: block;
+    background-color: #E24C4B;
+    color: white;
+    padding: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px black;
+    padding: 10px;
+    margin-bottom: 15px;
+    animation: anima_mensagem 0.5s;
+}
+
+.imagemMensagem {
+    width: 30px;
+    height: 30px;
+    float: right;
+    cursor: pointer;
+}
+
+@keyframes anima_mensagem {
+    from {
+        transform: translate3d(0px, 1000px, 0px);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0px, 0px, 0px);
+        opacity: 1;
+    }
 }
 
 .imagem_tela {
     width: 100px;
     height: 200px;
+}
+
+::-webkit-input-placeholder {
+    color: black;
+    font: 13px sans-serif;
+    font-style: italic;
+    opacity: 0.3;
 }

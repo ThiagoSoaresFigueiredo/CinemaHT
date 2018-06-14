@@ -69,7 +69,7 @@ class Cliente {
                 msg += "Nome é obrigatório \n";
 
             if (idade == "")
-                msg += "Idade é obrigatória\n";
+                msg += "Idade é obrigatório\n";
 
             if (email == "")
                 msg += "Email é obrigatório";
@@ -77,6 +77,7 @@ class Cliente {
             if (msg == "") {
                 if (window.confirm("Tem certeza que deseja salvar os dados informado ?")) {
                     this.id = this.nextId;
+                    
 
                     let obj = {};
                     obj.id = this.id;
@@ -93,7 +94,7 @@ class Cliente {
 
                     this.listar();
                     this.limparCampos();
-                    document.getElementById("mensagem").classList.remove("mostrar");
+                    document.getElementById("mensagem").classList.remove("mostrarMsg");
                     window.alert("Cliente salvo com sucesso!");
                 } else {
                     window.alert("Inclusão cancelada com sucesso. Nenhum cliente foi salvo no sistema");
@@ -102,9 +103,9 @@ class Cliente {
                     this.limparCampos();
                 }
             } else {
-                let divMensagem = document.getElementById("mensagem");
+                let divMensagem = document.getElementById("textoDaMensagem");
                 divMensagem.innerText = msg;
-                divMensagem.classList.add("mostrar");
+                document.getElementById("mensagem").classList.add("mostrarMsg");
             }
         } //else
     } // salvar()
@@ -139,6 +140,8 @@ class Cliente {
         let tabela = document.querySelector("tbody");
         tabela.innerHTML = "";
 
+        this.qtd = 0;
+
         for (let i = 0; i < this.clientes.length; i++) {
             if (this.clientes[i]) {
                 this.qtd++;
@@ -149,6 +152,9 @@ class Cliente {
                 let colunaEmail = linha.insertCell(2);
                 let colunaEditar = linha.insertCell(3);
                 let colunaExcluir = linha.insertCell(4);
+
+                if(i%2 == 0) 
+                    linha.classList.add("corSim");
 
                 colunaNome.innerText = this.clientes[i].nome;
                 colunaIdade.innerText = this.clientes[i].idade;
@@ -168,6 +174,8 @@ class Cliente {
 
                 colunaEditar.appendChild(imgEditar);
                 colunaExcluir.appendChild(imgExcluir);
+
+                document.getElementById("qtde").innerHTML = "(<i>" + this.qtd + "</i>)";
             }
         }
     }
