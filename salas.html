@@ -3,18 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Clientes</title>
+    <title>Salas</title>
 
-    <script src="js/modelo/Clientes.js"></script>
-
-    <link rel="stylesheet" href="css/clientes.css">
+    <link rel="stylesheet" href="css/filmes.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/modelo/Salas.js"></script>
 </head>
 
-<body onload="cliente.carregarDados()">
+<body onload="sala.carregarDados()">
     <h1>Cinema HT</h1>
 
     <nav>
@@ -43,30 +44,18 @@
         </ul>
     </nav>
 
-    <h1>Gerência de Clientes</h1>
+    <h1>Gerência de Salas</h1>
 
     <div id="mensagem" class="ocultar"></div>
 
     <div>
-        <label for="nome">Nome</label>
-        <input id="nome" type="text" placeholder="Nome do cliente" autofocus required />
-    </div>
-    <div>
-        <label for="idade">Idade</label>
-        <input id="idade" type="number" placeholder="Idade do cliente" />
-    </div>
-    <div>
-        <label for="email">Email</label>
-        <input id="email" type="email" placeholder="Email do cliente" />
+        <label for="sala">Para gerar uma nova sala clique no botão abaixo</label>
     </div>
 
-    <div>
-        <button id="btnSalvar" onclick="cliente.salvar()">Salvar</button>
-        <button id="btnLimpar" onclick="cliente.limparCampos()">Limpar</button>
-    </div>
+    <button id="btnSalvar" onclick="sala.salvar()" title="Ao clicar neste botão uma nova sala será gerada">Salvar</button>
 
     <section>
-        <h2>Clientes Cadastrados (
+        <h2>Salas Cadastradas (
             <small>
                 <i>
                     <b>
@@ -76,16 +65,13 @@
             </small>)
         </h2>
 
-        <table id="tdados">
-            <thead>
-                <th>Nome</th>
-                <th>Idade</th>
-                <th>Email</th>
+        <table id="tdados" style="text-align: center;">
+            <thead id="thead">
+                <th>Sala</th>
                 <th></th>
                 <th></th>
             </thead>
             <tbody id="tbody"></tbody>
-
         </table>
     </section>
 
@@ -94,7 +80,7 @@
         <footer style="text-align: center">
             <small>
                 <i>
-                    <span>Desenvolvido por Thiago Soares Figueiredo (67)99285-2824</span>
+                    <span>Desenvolvido por Thiago Soares Figueiredo</span>
                 </i>
             </small>
         </footer>

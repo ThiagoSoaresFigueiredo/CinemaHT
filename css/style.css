@@ -17,3 +17,8 @@
 .mostrar {
     display: block;
 }
+
+.imagem_tela {
+    width: 100px;
+    height: 200px;
+}

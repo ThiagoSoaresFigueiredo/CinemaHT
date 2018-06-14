@@ -103,6 +103,7 @@ class Filme {
                 this.salvarDados();
                 this.listar();
                 this.limparCampos();
+                this.qtde++;
             } // if
         } // else
     } // salvar()
@@ -113,7 +114,6 @@ class Filme {
         document.getElementById("mensagem").classList.remove("mostrar");
 
         for (let i = 0; i < this.filmes.length; i++) {
-            this.qtde++;
 
             let linha = tabela.insertRow();
             let colunaNome = linha.insertCell(0);
