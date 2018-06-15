@@ -16,9 +16,11 @@
 </head>
 
 <body onload="filme.carregarDados()">
-    <h1>Cinema HT</h1>
-
     <nav>
+        <h2 class="centro">
+            <a href="home.html">Cinema HT</a>
+        </h2>
+
         <ul>
             <li>
                 <a href="home.html">Home</a>
@@ -44,79 +46,90 @@
         </ul>
     </nav>
 
-    <h1>Gerência de Filmes</h1>
+    <main>
+        <div class="tituloPagina">
+            <h1>Gerência de Clientes</h1>
+        </div>
 
-    <div id="mensagem" class="ocultar"></div>
+        <div>
+            <h2>Novo Cliente</h2>
+        </div>
 
-    <div>
-        <label for="nome">Nome do filme:</label>
-        <input id="nome" type="text" placeholder="Nome do filme" autofocus />
-    </div>
-    <div>
-        <label for="duracao">Duração:</label>
-        <input id="duracao" type="number" placeholder="Duração em minutos" />
-    </div>
-    <div>
-        <label for="classificacao">Classificação etária:</label>
-        <input id="classificacao" type="number" placeholder="Idade mínima" />
-    </div>
-    <div>
-        <label for="genero">Gênero:</label>
-        <select id="genero" size="1">
-            <option value="" selected>Selecione um gênero</option>
-            <option value="acao">Ação</option>
-            <option value="adulto">Adulto</option>
-            <option value="animacao">Animação</option>
-            <option value="autobiografia">Autobiografia</option>
-            <option value="aventura">Aventura</option>
-            <option value="comedia">Comédia</option>
-            <option value="danca">Dança</option>
-            <option value="desenho">Desenho</option>
-            <option value="documentario">Documentário</option>
-            <option value="drama">Drama</option>
-            <option value="espionagem">Espionagem</option>
-            <option value="fantasia">Fantasia</option>
-            <option value="faroeste">Faroeste</option>
-            <option value="ficcao">Ficção</option>
-            <option value="guerra">Guerra</option>
-            <option value="musical">Musical</option>
-            <option value="policial">Policial</option>
-            <option value="romance">Romance</option>
-            <option value="seriado">Seriado</option>
-            <option value="suspense">Suspense</option>
-            <option value="terror">Terror</option>
-        </select>
-    </div>
-    <div>
-        <label for="sinopse">Sinopse:</label>
-        <textarea id="sinopse" cols="100" rows="10"></textarea>
-    </div>
+        <div id="mensagem" class="ocultarMsg">
+            <img src="img/close-msg.svg" class="imagemMensagem" title="Fechar as mensagens de erro." onclick="fecharMensagem()" />
+            <div id="textoDaMensagem"></div>
+        </div>
 
-    <button id="btnSalvar" onclick="filme.salvar()">Salvar</button>
-    <button id="btnLimpar" onclick="filme.limpar()">Limpar</button>
+        <div>
+            <label for="nome">Nome do filme:</label>
+            <input id="nome" type="text" placeholder="Nome do filme" autofocus />
+        </div>
+        <div>
+            <label for="duracao">Duração:</label>
+            <input id="duracao" type="number" placeholder="Duração em minutos" />
+        </div>
+        <div>
+            <label for="classificacao">Classificação etária:</label>
+            <input id="classificacao" type="number" placeholder="Idade mínima" />
+        </div>
+        <div>
+            <label for="genero">Gênero:</label>
+            <select id="genero" size="1">
+                <option value="" selected>Selecione um gênero</option>
+                <option value="acao">Ação</option>
+                <option value="adulto">Adulto</option>
+                <option value="animacao">Animação</option>
+                <option value="autobiografia">Autobiografia</option>
+                <option value="aventura">Aventura</option>
+                <option value="comedia">Comédia</option>
+                <option value="danca">Dança</option>
+                <option value="desenho">Desenho</option>
+                <option value="documentario">Documentário</option>
+                <option value="drama">Drama</option>
+                <option value="espionagem">Espionagem</option>
+                <option value="fantasia">Fantasia</option>
+                <option value="faroeste">Faroeste</option>
+                <option value="ficcao">Ficção</option>
+                <option value="guerra">Guerra</option>
+                <option value="musical">Musical</option>
+                <option value="policial">Policial</option>
+                <option value="romance">Romance</option>
+                <option value="seriado">Seriado</option>
+                <option value="suspense">Suspense</option>
+                <option value="terror">Terror</option>
+            </select>
+        </div>
+        <div>
+            <label for="sinopse">Sinopse:</label>
+            <textarea id="sinopse" cols="100" rows="10"></textarea>
+        </div>
 
-    <section>
-        <h2>Filmes Cadastrados (
-            <small>
-                <i>
-                    <b>
-                        <span id="qtde">0</span>
-                    </b>
-                </i>
-            </small>)
-        </h2>
+        <button id="btnSalvar" onclick="filme.salvar()">Salvar</button>
+        <button id="btnLimpar" onclick="filme.limpar()">Limpar</button>
 
-        <table id="tdados">
-            <thead>
-                <th>Filme</th>
-                <th>Duração</th>
-                <th></th>
-                <th></th>
-            </thead>
-            <tbody id="tbody"></tbody>
-        </table>
-    </section>
+        <section>
+            <h2>Filmes Cadastrados (
+                <small>
+                    <i>
+                        <b>
+                            <span id="qtde">0</span>
+                        </b>
+                    </i>
+                </small>)
+            </h2>
 
+            <table id="tdados">
+                <thead>
+                    <th>Filme</th>
+                    <th>Duração</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </section>
+    </main>
+    
     <p>
         <hr>
         <footer style="text-align: center">

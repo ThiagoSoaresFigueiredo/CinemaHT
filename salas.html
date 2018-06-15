@@ -16,9 +16,11 @@
 </head>
 
 <body onload="sala.carregarDados()">
-    <h1>Cinema HT</h1>
+    <nav class="centro">
+        <h2 class="centro">
+            <a href="home.html">Cinema HT</a>
+        </h2>
 
-    <nav>
         <ul>
             <li>
                 <a href="home.html">Home</a>
@@ -44,47 +46,52 @@
         </ul>
     </nav>
 
-    <h1>Gerência de Salas</h1>
+    <main>
+        <div class="tituloPagina">
+            <h1>Gerência de Salas</h1>
+        </div>
 
-    <div id="mensagem" class="ocultar"></div>
+        <div>
+            <h2>Nova Sala</h2>
+        </div>
 
-    <div>
-        <label for="sala">Para gerar uma nova sala clique no botão abaixo</label>
-    </div>
+        <div id="mensagem" class="ocultar"></div>
 
-    <button id="btnSalvar" onclick="sala.salvar()" title="Ao clicar neste botão uma nova sala será gerada">Salvar</button>
+        <div>
+            <label for="sala">Para gerar uma nova sala clique no botão abaixo</label>
+        </div>
+        <div>
+            <button id="btnSalvar" onclick="sala.salvar()" title="Ao clicar neste botão uma nova sala será gerada">Salvar</button>
+        </div>
 
-    <section>
-        <h2>Salas Cadastradas (
-            <small>
-                <i>
-                    <b>
-                        <span id="qtde">0</span>
-                    </b>
-                </i>
-            </small>)
-        </h2>
+        <section>
+            <div>
+                <h2>Salas Cadastradas
+                    <span id="qtde"></span>
+                </h2>
+            </div>
 
-        <table id="tdados" style="text-align: center;">
-            <thead id="thead">
-                <th>Sala</th>
-                <th></th>
-                <th></th>
-            </thead>
-            <tbody id="tbody"></tbody>
-        </table>
-    </section>
+            <table id="tdados">
+                <thead>
+                    <th>Sala</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </section>
 
-    <p>
-        <hr>
-        <footer style="text-align: center">
-            <small>
-                <i>
-                    <span>Desenvolvido por Thiago Soares Figueiredo</span>
-                </i>
-            </small>
-        </footer>
-    </p>
+        <p>
+            <hr>
+            <footer style="text-align: center">
+                <small>
+                    <i>
+                        <span>Desenvolvido por Thiago Soares Figueiredo</span>
+                    </i>
+                </small>
+            </footer>
+        </p>
+    </main>
 </body>
 
 </html>
