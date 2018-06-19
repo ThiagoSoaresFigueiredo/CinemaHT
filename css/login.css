@@ -1,0 +1,98 @@
+#login {
+    font-family: sans-serif;
+    background-color: #f1f1f1;
+    width: 20%;
+    margin: auto;
+    margin-top: 5%;
+    padding: 10px;
+    border: none;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 0px 0px 1000px black;
+    opacity: .9;
+}
+
+#login div {
+    text-align: center;
+    padding: 5px;
+}
+
+#login input {
+    width: 93%;
+    padding: 10px;
+}
+
+#login button {
+    width: 100%;
+    background-color: #4242ff;
+    color: white;
+    padding: 10px;
+}
+
+#register {
+    font-size: 10pt;
+    color: darkgrey;
+}
+
+#login h1 {
+    color: grey;
+    font-weight: 300;
+}
+
+#login img {
+    width: 200px;
+}
+
+body {
+    margin-top: 30px;
+    background: url("http://1.bp.blogspot.com/-M5ki7bt8FzE/Uq309qm0vII/AAAAAAAAAZo/O6KKwvNc3p4/s1600/movie-theater-seats.jpg");
+    background-size: cover;
+}
+
+div label {
+    text-align: left !important;
+}
+
+#textoDaMensagem {
+    text-align: left !important;
+}
+
+.imagemMensagem {
+    width: 30px !important;
+    height: 30px;
+    float: right;
+    cursor: pointer;
+    margin-right: 5px !important;
+}
+
+#mensagem {
+    margin-bottom: 25px;
+}
+
+.ocultarMsg {
+    display: none;
+}
+
+.mostrarMsg {
+    width: auto;
+    font-family: sans-serif;
+    font-weight: 600;
+    display: block;
+    background-color: #800000;
+    color: white;
+    padding: 0px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px black;
+    text-align: left;
+}
+
+@keyframes anima_mensagem {
+    from {
+        transform: translate3d(0px, 1000px, 0px);
+        opacity: 0;
+    }
+    to {
+        transform: translate3d(0px, 0px, 0px);
+        opacity: 1;
+    }
+}

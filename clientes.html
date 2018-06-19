@@ -15,17 +15,19 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body onload="cliente.carregarDados()">
+<body onload="cliente.carregarDados();">
 
     <nav class="centro">
-        <h2 class="centro"><a href="home.html">Cinema HT</a></h2>
+        <h2 class="centro">
+            <a href="home.html">Cinema HT</a>
+        </h2>
 
         <ul>
             <li>
                 <a href="home.html">Home</a>
             </li>
             <li>
-                <a href="home.html">Reservas</a>
+                <a href="reservas.html">Reservas</a>
             </li>
             <li>
                 <a href="sessoes.html">Sessões</a>
@@ -40,7 +42,8 @@
                 <a href="filmes.html">Filmes</a>
             </li>
             <li>
-                <a href="home.html">Sair</a>
+                <a href="login.html">Sair</a>
+                <div id="usuarioLogado">Nenhum usuário logado</div>
             </li>
         </ul>
     </nav>
@@ -60,21 +63,24 @@
         </div>
 
         <div>
-            <label for="nome">Nome: </label>
-            <input id="nome" type="text" placeholder="Nome do cliente" title="Nome do cliente. Campo obrigatório." autofocus required />
+            <label for="nome">*Nome: </label>
+            <input id="nome" type="text" placeholder="Nome do cliente" title="Campo obrigatório." autofocus required />
         </div>
         <div>
-            <label for="idade">Idade: </label>
-            <input id="idade" type="number" title="Idade do cliente. Campo obrigatório." placeholder="Idade do cliente" />
+            <label for="idade">*Idade: </label>
+            <input id="idade" type="number" title="Campo obrigatório." placeholder="Idade do cliente" required />
         </div>
         <div>
-            <label for="email">Email: </label>
-            <input id="email" type="email" title="Email do cliente. Campo obrigatório." placeholder="Email do cliente" />
+            <label for="email">*Email: </label>
+            <input id="email" type="email" title="Campo obrigatório." placeholder="Email do cliente" required />
+        </div>
+        <div id="msgCampoObrigatorio">
+            Os campos marcados com (*) são obrigatórios
         </div>
 
         <div>
-            <button id="btnSalvar" class="btnSalvar" onclick="cliente.salvar()" title="Salva todos os dados informados do cliente.">Salvar</button>
-            <button id="btnLimpar" class="btnLimpar" onclick="cliente.limparCampos()" title="Limpa todos os campos para nova digitação.">Limpar</button>
+            <button id="btnSalvar" onclick="cliente.salvar()" title="Salva os dados informados">Salvar</button>
+            <button id="btnLimpar" onclick="cliente.limparCampos()" title="Limpa todos os campos">Limpar</button>
         </div>
 
         <section>
@@ -92,7 +98,9 @@
                     <th></th>
                     <th></th>
                 </thead>
-                <tbody id="tbody"></tbody>
+                <tbody id="corpoTabela">
+
+                </tbody>
             </table>
         </section>
         </form>

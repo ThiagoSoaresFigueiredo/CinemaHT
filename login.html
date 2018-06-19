@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Cinema HT - Login</title>
+
+    <link rel="stylesheet" href="css/login.css">
+
+    <script src="js/modelo/Login.js"></script>
+    <script src="js/modelo/Utils.js"></script>
+</head>
+
+<body onload="login.carregarDados()">
+    <div id="login">
+        <div>
+            <img src="https://res.cloudinary.com/hashnode/image/upload/v1495178101/fhv2hc8cy1pykb6c5ii5.png">
+        </div>
+
+        <div>
+            <h1> Log-in </h1>
+        </div>
+
+        <div id="mensagem" class="ocultarMsg">
+            <img src="img/close-msg.svg" class="imagemMensagem" title="Fechar as mensagens de erro." onclick="fecharMensagem()" />
+            <div id="textoDaMensagem"></div>
+        </div>
+
+        <div>
+            <input id="usuario" type="text" placeholder="Usuário" required autofocus />
+        </div>
+        <div>
+            <input id="senha" type="password" placeholder="Senha" required />
+        </div>
+        <div>
+            <button onclick="login.verificarLogin()"> Logar </button>
+        </div>
+
+        <div id="register">
+            <a href="register.html">Cadastrar</a>
+        </div>
+    </div>
+</body>
+
+</html>

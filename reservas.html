@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Salas</title>
-
-    <script src="js/modelo/Salas.js"></script>
-    <script src="js/modelo/Utils.js"></script>
+    <title>Reservas</title>
 
     <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/modelo/Reserva.js"></script>
+    <script src="js/modelo/Utils.js"></script>
 </head>
 
-<body onload="sala.carregarDados();">
-
+<body onload="reserva.carregarDados()">
     <nav class="centro">
         <h2 class="centro">
             <a href="home.html">Cinema HT</a>
         </h2>
-
         <ul>
             <li>
                 <a href="home.html">Home</a>
@@ -50,11 +48,11 @@
 
     <main>
         <div class="tituloPagina">
-            <h1>Gerência de Salas</h1>
+            <h1>Gerência de Reservas</h1>
         </div>
 
         <div>
-            <h2>Nova Sala</h2>
+            <h2>Nova Reserva</h2>
         </div>
 
         <div id="mensagem" class="ocultarMsg">
@@ -63,42 +61,70 @@
         </div>
 
         <div>
-            <label for="nome">*Nome: </label>
-            <input id="nome" type="text" placeholder="Nome da sala" title="Campo obrigatório." autofocus required />
+            <label for="sessao"> Sessão: </label>
+            <select id="sessao" size="1" autofocus required ></select>
         </div>
-        <div id="msgCampoObrigatorio">
-            Os campos marcados com (*) são obrigatórios
+        <div>
+            <label for="cliente"> Cliente: </label>
+            <select id="cliente" size="1" required>
+                <option value="">Selecione um cliente</option>
+            </select>
         </div>
 
         <div>
-            <button id="btnSalvar" onclick="sala.salvar()" title="Salva os dados informados">Salvar</button>
-            <button id="btnLimpar" onclick="sala.limparCampos()" title="Limpa todos os campos">Limpar</button>
+            <button onclick="reserva.mostrarReservas()">Mostrar reservas</button>
         </div>
+
+        <div id="bloco-de-cadeiras">
+            <fieldset id="listagem-de-cadeiras" class="ocultar-cadeiras">
+                <legend>Escolha a cadeira</legend>
+                <table id="cadeiras">
+                    <thead>
+                        <th></th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                    </thead>
+                    <tbody style="text-align: center;" id="tbodyCadeiras"></tbody>
+                </table>
+            </fieldset>
+        </div>
+
+        <button id="btnSalvar" onclick="reserva.salvar()">Salvar</button>
+        <button id="btnLimpar" onclick="reserva.limparCampos()">Limpar</button>
 
         <section>
             <div>
-                <h2>Salas Cadastradas
+                <h2>Reservas Cadastradas
                     <span id="qtde"></span>
                 </h2>
             </div>
 
             <table id="tdados">
                 <thead>
-                    <th>Nome</th>
+                    <th>Cliente</th>
+                    <th>Sessão</th>
+                    <th>Cadeira</th>
                     <th></th>
                     <th></th>
                 </thead>
                 <tbody id="tbody"></tbody>
             </table>
         </section>
-        </form>
 
         <p>
             <hr>
             <footer style="text-align: center">
                 <small>
                     <i>
-                        <span>Desenvolvido por Thiago Soares Figueiredo (67)99285-2824</span>
+                        <span>Desenvolvido por Thiago Soares Figueiredo</span>
                     </i>
                 </small>
             </footer>

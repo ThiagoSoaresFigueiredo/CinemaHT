@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
@@ -7,21 +8,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Cinema HT</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/modelo/Home.js"></script>
 </head>
 
-<body>
-    <h1>Cinema HT</h1>
+<body onload="home.buscarDados()">
+    <nav class="centro">
+        <h2 class="centro">
+            <a href="home.html">Cinema HT</a>
+        </h2>
 
-    <nav>
         <ul>
             <li>
                 <a href="home.html">Home</a>
             </li>
             <li>
-                <a href="home.html">Reservas</a>
+                <a href="reservas.html">Reservas</a>
             </li>
             <li>
-                <a href="sessao.html">Sessões</a>
+                <a href="sessoes.html">Sessões</a>
             </li>
             <li>
                 <a href="salas.html">Salas</a>
@@ -33,12 +40,21 @@
                 <a href="filmes.html">Filmes</a>
             </li>
             <li>
-                <a href="home.html">Sair</a>
+                <a href="login.html">Sair</a>
+                <div id="usuarioLogado">Nenhum usuário logado</div>
             </li>
         </ul>
     </nav>
 
-    <h1>Olá, seja bem-vindo(a) ao Cinema HT</h1>
+    <main>
+        <div class="tituloPagina">
+            <h1>Sistema Cinema HT</h1>
+        </div>
+
+        <div>
+            <h2 id="tela"></h2>
+        </div>
+    </main>
 </body>
 
 </html>

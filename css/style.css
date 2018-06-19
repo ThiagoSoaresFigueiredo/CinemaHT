@@ -8,10 +8,14 @@ div {
     width: 100%;
 }
 
+nav h2 {
+    padding: 12px;
+}
+
 nav h2 a {
     padding: 15px;
     font-size: xx-large;
-    text-shadow: 0px 0px 8px white;
+    text-shadow: 0px 1px 8px black;
 }
 
 nav {
@@ -20,7 +24,9 @@ nav {
     height: 100%;
     position: fixed;
     color: white;
-    background-color: #20B2AA;
+    background-color: #008B8B;
+    background-image: linear-gradient(to right, #008B8B, #20B2AA);
+    opacity: .7;
 }
 
 nav ul {
@@ -34,14 +40,10 @@ nav li {
     list-style: none;
 }
 
-nav li:hover {
-    font-size: xx-large;
-}
-
 li a:hover {
-    color: #5F9EA0;
-    text-shadow: 1px 1px 0px gray;
-    font-size: x-large;
+    color: black;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px white;
 }
 
 nav a {
@@ -58,7 +60,6 @@ main {
 }
 
 label {
-    text-align: right;
     font-size: large;
     font-weight: normal;
 }
@@ -66,18 +67,21 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="number"],
-input[type="datetime-local"] {
+input[type="datetime-local"],
+input[type="date"],
+input[type="time"],
+select {
     width: 50%;
     border: none;
-    border-bottom: 2px double black;
+    border-bottom: 1px double black;
     animation: none;
     margin-left: 10px;
-    position: relative;
     padding: 5px;
     outline: none;
     color: blue;
     font-weight: 500;
     font-size: large;
+    cursor: pointer;
 }
 
 button {
@@ -88,6 +92,7 @@ button {
     font-weight: 600;
     width: 15%;
     color: white;
+    background-color: #008B8B;
     border-radius: 2px;
     margin-top: 10px;
     outline: none;
@@ -110,7 +115,7 @@ table {
 }
 
 th {
-    background-color: #008B8B;
+    background-color: #2F4F4F;
     width: auto;
     padding: 15px;
     margin: auto;
@@ -125,6 +130,32 @@ td {
     padding: 5px;
 }
 
+select {
+    font-size: large;
+}
+
+input[type="radio"] {
+    margin: 0px;
+    border: none;
+    padding: 0px;
+    background-color: blue;
+    cursor: pointer;
+}
+
+textarea {
+    display: block;
+}
+
+button {
+    margin-left: 10px;
+}
+
+.label3d2d {
+    color: blue;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
 .corSim {
     background-color: #40E0D0;
 }
@@ -136,18 +167,10 @@ td {
     color: blue;
 }
 
-.btnSalvar {
-    background-color: #008B8B;
-}
-
-.btnLimpar {
-    background-color: #008B8B;
-}
-
 .tituloPagina {
     width: 100%;
     color: white;
-    background-color: #008B8B;
+    background-color: #2F4F4F;
 }
 
 .centro {
@@ -179,7 +202,7 @@ td {
     font-family: sans-serif;
     font-weight: 600;
     display: block;
-    background-color: #E24C4B;
+    background-color: #8B0000;
     color: white;
     padding: 20px;
     border: none;
@@ -187,7 +210,6 @@ td {
     box-shadow: 5px 5px 15px black;
     padding: 10px;
     margin-bottom: 15px;
-    animation: anima_mensagem 0.5s;
 }
 
 .imagemMensagem {
@@ -218,4 +240,37 @@ td {
     font: 13px sans-serif;
     font-style: italic;
     opacity: 0.3;
+}
+
+#usuarioLogado {
+    width: 100%;
+    color: #000000;
+    font-size: small;
+}
+
+.reservarCadeira {
+    background-color: #000000;
+    width: 15px;
+    height: 15px;
+    cursor: auto;
+}
+
+.liberarCadeira {}
+
+#bloco-de-cadeiras {
+    width: 90%;
+    margin: auto;
+}
+
+#msgCampoObrigatorio {
+    font-size: small;
+    font-style: italic;
+}
+
+.ocultar-cadeiras {
+    display: none;
+}
+
+.mostrar-cadeiras {
+    display: block;
 }

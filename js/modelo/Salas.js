@@ -1,129 +1,203 @@
 class Sala {
 
     constructor() {
-        this.id;
         this.salas = [];
-        this.proximoId;
-        this.ultimoId;
-        this.qtde = 0;
+        this.sala = {};
+        this.qtd = 0;
+        this.msg = "";
         this.isEdicao = false;
-        this.idEdicao = 0;
-    } // construtor
+        this.idEdicao = -1;
+    } // Fim do construtor()
+
+    carregarUsuarioLogado() {
+        let usuarioLogado = JSON.parse(localStorage.getItem("usuario"));
+
+        if (usuarioLogado == null) {
+            document.getElementById("usuarioLogado").innerHTML = "Usuário:<br/>&nbsp;&nbsp;&nbsp;&nbsp;<b> Teste </b>"
+        } else {
+            document.getElementById("usuarioLogado").innerHTML = "Usuário:<br/>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + usuarioLogado + "</b>"
+        } // else
+    } // Fim de carregarUsuarioLogado()
 
     carregarDados() {
-        let salasCadastradas = null;
-        salasCadastradas = JSON.parse(localStorage.getItem("salas"));
+        this.carregarUsuarioLogado();
 
-        let proximoId = localStorage.getItem("proximoId");
-        let ultimoId = localStorage.getItem("ultimoId");
-
-        if (salasCadastradas == null) {
-            this.salas = [];
-            this.id = 0;
-            this.proximoId = 0;
+        if (this.salas = JSON.parse(localStorage.getItem("salas"))) {
+            this.listar();
         } else {
-            this.salas = salasCadastradas;
-            this.id = proximoId;
-            this.proximoId = proximoId;
+            this.salas = [];
         } // else
-    } // carregarDados()
+    } // Fim de carregarDados()
 
     salvarDados() {
-        localStorage.setItem("ultimoId", this.id);
-        localStorage.setItem("proximoId", this.proximoId);
+        if (this.salas.length > 0) {
+            localStorage.setItem("salas", JSON.stringify(this.salas));
+        } // if
+    } // Fim de salvarDados()
 
-        let salaJson = JSON.stringify(this.salas);
-        localStorage.setItem("salas", salaJson);
-    } // salvarDados()
+    listar() { // LISTAR
+        let tabela = document.querySelector("tbody")
+        tabela.innerHTML = "";
 
-    salvar() {
-        if (window.confirm("Tem certeza que deseja criar uma nova sala ?")) {
-            this.id = this.proximoId;
+        this.qtd = 0;
 
-            let fileiras = [];
+        if (this.salas.length > 0) {
+            for (let i = 0; i < this.salas.length; i++) {
+                if (this.salas[i]) {
+                    this.qtd++;
 
-            for (let l = 0; l < 6; l++) {
-                let cadeiras = [];
-                for (let c = 0; c < 10; c++) {
-                    cadeiras[c] = true;
-                }
-                fileiras[l] = cadeiras;
-            }
+                    let linha = tabela.insertRow();
+                    let colunaNome = linha.insertCell(0);
+                    let colunaEditar = linha.insertCell(1);
+                    let colunaExcluir = linha.insertCell(2);
 
-            let sala = {};
-            sala.id = this.id;
-            sala.nome = "sala-0" + this.id;
-            sala.fileiras = fileiras;
+                    if (i % 2 == 0) {
+                        linha.classList.add("corSim");
+                    } else {
+                        linha.classList.add("corNao");
+                    } // else
 
-            this.salas.push(sala);
+                    colunaNome.innerText = this.salas[i].nome;
 
-            this.qtde++;
+                    let imgExcluir = document.createElement("img");
+                    imgExcluir.src = "img/excluir.svg";
+                    imgExcluir.title = "Excluir";
+                    imgExcluir.classList.add("icone");
+                    imgExcluir.setAttribute("onclick", "sala.excluir('" + i + "')");
 
-            this.listar();
+                    let imgEditar = document.createElement("img");
+                    imgEditar.src = "img/editar.svg";
+                    imgEditar.title = "Editar";
+                    imgEditar.classList.add("icone");
+                    imgEditar.setAttribute("onclick", "sala.editar('" + i + "')");
 
-            window.alert("Nova sala criada com sucesso");
-        } else {
-            window.alert("A criação da sala foi cancelada. Nada foi gerado");
+                    colunaEditar.appendChild(imgEditar);
+                    colunaExcluir.appendChild(imgExcluir);
+                } // if
+            } // for
         }
-    } // salvar()
+        document.getElementById("qtde").innerHTML = "(<i>" + this.qtd + "</i>)";
+    } // Fim de listar()
 
-    listar() {
-        let tabela = document.getElementById("tbody");
-        tabela.innerHTML = "";
+    salvar() { // SALVAR
+        if (this.isEdicao) {
+            this.editarRegistro();
+        } else {
+            this.pegarDadosDaTela();
 
-        for(let i = 0; i < this.salas.length; i++) {
-            let linha = tabela.insertRow();
-            let colunaNome = linha.insertCell(0);
-            let colunaExcluir = linha.insertCell(1);
+            if (this.msg == "") {
+                if (window.confirm("Tem certeza que deseja salvar os dados informados ?")) {
+                    this.salas.push(this.sala);
+                    this.limparCampos();
+                    this.listar();
+                    this.salvarDados();
 
-            colunaNome.innerText = this.salas[i].nome;
+                    window.alert("Registro salvo com sucesso");
+                } else {
+                    this.limparCampos();
 
-            let imgExcluir = document.createElement("img");
-            imgExcluir.src = "img/excluir.svg";
-            imgExcluir.title = "Excluir";
-            imgExcluir.classList.add("icone");
-            imgExcluir.setAttribute("onclick", "sala.excluir('" + i + "')");
+                    window.alert("Inclusão cancelada. Nenhum registro foi salvo");
+                } // else
+            } // if
+        } // else
+    } // Fim de salvar()
 
-            colunaExcluir.appendChild(imgExcluir);
-        } // for
-    } // listar()
-
-    montarCadeiras() {
-        let tabela = document.querySelector("tbody");
-        tabela.innerHTML = "";
-
-        let img = document.createElement("img");
-        img.src = "img/poltrona-livre.svg";
-        img.classList.add("icone");
-
-        let nomeDasFileiras = ["A", "B", "C", "D", "E", "F"];
-
-        for (let l = 0; l < 6; l++) {
-
-            let fileira = tabela.insertRow();
-            fileira.innerHTML = "<span>" + nomeDasFileiras[l] + "</span>";
-            
-            for (let c = 0; c < 10; c++) {
-                let cadeira = fileira.insertCell(c);
-                cadeira.innerHTML = "<img src='img/poltrona-livre.svg' class='icone' />";
-            }
-        } // for do registro
-    } // montarCadeiras()
-
-    excluir(id) {
-        if(window.confirm("Tem certeza que deseja excluir esta sala ?")) {
-            this.salas.splice(id, 1);
-            this.qtde--;
+    excluir(i) { // EXCLUIR 
+        if (window.confirm("Tem certeza que deseja excluir este registro ?")) {
+            this.salas.splice(i, 1);
+            this.listar();
             this.salvarDados();
-            this.listar();
-
-            window.alert("Sala criada com sucesso");
+            window.alert("Registro excluído com sucesso");
         } else {
-            window.alert("A exclusão foi cancelada com sucesso. Nenhuma sala foi criada");
+            window.alert("Exclusão cancelada. Nenhum registro foi apagado")
+        } // else
+    } // Fim de excluir()
 
-            this.listar();
-        }
-    } // excluir()
+    editar(i) { // EDITAR
+        this.isEdicao = true;
+        this.idEdicao = i;
+
+        document.getElementById("nome").value = this.salas[i].nome;
+
+        document.getElementById("btnSalvar").innerText = "Salvar edição";
+        document.getElementById("btnLimpar").innerText = "Cancelar edição";
+    } // Fim de editar()
+
+    editarRegistro() {
+        if (this.idEdicao >= 0) {
+
+            this.pegarDadosDaTela();
+
+            if (this.msg == "") {
+                if (window.confirm("Tem certeza que deseja alterar este registro ?")) {
+                    this.salas[this.idEdicao] = this.sala;
+
+                    this.isEdicao = false;
+                    this.limparCampos();
+                    this.listar();
+                    this.salvarDados();
+
+                    document.getElementById("btnSalvar").innerText = "Salvar";
+                    document.getElementById("btnLimpar").innerText = "Limpar";
+
+                    window.alert("Registro alterado com sucesso");
+                } else {
+                    this.limparCampos();
+
+                    window.alert("Edição cancelada. Nenhum registro foi alterado");
+                }
+            } // if
+        } // if
+    } // eidtarRegistro()
+
+    pegarDadosDaTela() {
+        let nome = document.getElementById("nome").value;
+
+        this.sala = {};
+        this.sala.nome = nome;
+
+        this.validarDados();
+
+        if (this.msg == "") {
+            this.ocultarMensagens();
+        } else {
+            this.mostrarMensagens();
+        } // else
+    } // Fim de pegarDadosDaTela()
+
+    validarDados() {
+        this.msg = "";
+
+        if (this.sala.nome == "") {
+            this.msg += "Nome é obrigatório \n";
+        } // if
+    } // Fim de this.validarDados()
+
+    mostrarMensagens() {
+        let divMensagem = document.getElementById("textoDaMensagem");
+        divMensagem.innerText = this.msg;
+        document.getElementById("mensagem").classList.add("mostrarMsg");
+    } // Fim de mostrarMensagensDeValidacao()
+
+    ocultarMensagens() {
+        let divMensagem = document.getElementById("textoDaMensagem");
+        divMensagem.innerText = this.msg;
+        document.getElementById("mensagem").classList.remove("mostrarMsg");
+    } // Fim de mostrarMensagensDeValidacao()
+
+    limparCampos() {
+        document.getElementById("nome").value = "";
+
+        this.ocultarMensagens();
+
+        if (this.isEdicao) {
+            document.getElementById("btnSalvar").innerText = "Salvar";
+            document.getElementById("btnLimpar").innerText = "Limpar";
+
+            this.isEdicao = false;
+        } // if
+    } // Fim de limparCampos()
+
 } // Fim da classe
 
 var sala = new Sala();

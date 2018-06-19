@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
@@ -9,22 +10,23 @@
 
     <title>Sessões</title>
 
-    <link rel="stylesheet" href="css/filmes.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="js/modelo/Sessao.js"></script>
+    <script src="js/modelo/Sessoes.js   "></script>
+    <script src="js/modelo/Utils.js"></script>
 </head>
 
-<body onload="filme.carregarDados()">
-    <h1>Cinema HT</h1>
-
-    <nav>
+<body onload="sessao.carregarDados()">
+    <nav class="centro">
+        <h2 class="centro">
+            <a href="home.html">Cinema HT</a>
+        </h2>
         <ul>
             <li>
                 <a href="home.html">Home</a>
             </li>
             <li>
-                <a href="home.html">Reservas</a>
+                <a href="reservas.html">Reservas</a>
             </li>
             <li>
                 <a href="sessoes.html">Sessões</a>
@@ -39,94 +41,104 @@
                 <a href="filmes.html">Filmes</a>
             </li>
             <li>
-                <a href="home.html">Sair</a>
+                <a href="login.html">Sair</a>
+                <div id="usuarioLogado">Nenhum usuário logado</div>
             </li>
         </ul>
     </nav>
 
-    <h1>Gerência de Filmes</h1>
+    <main>
+        <div class="tituloPagina">
+            <h1>Gerência de Sessões</h1>
+        </div>
 
-    <div id="mensagem" class="ocultar"></div>
+        <div>
+            <h2>Nova Sessão</h2>
+        </div>
 
-    <div>
-        <label for="file">Filme da sessão</label>
-        <input id="filme" type="text" placeholder="Nome do filme" autofocus />
-    </div>
-    <div>
-        <label for="duracao">Duração:</label>
-        <input id="duracao" type="number" placeholder="Duração em minutos" />
-    </div>
-    <div>
-        <label for="classificacao">Classificação etária:</label>
-        <input id="classificacao" type="number" placeholder="Idade mínima" />
-    </div>
-    <div>
-        <label for="genero">Gênero:</label>
-        <select id="genero" size="1">
-            <option value="" selected>Selecione um gênero</option>
-            <option value="acao">Ação</option>
-            <option value="adulto">Adulto</option>
-            <option value="animacao">Animação</option>
-            <option value="autobiografia">Autobiografia</option>
-            <option value="aventura">Aventura</option>
-            <option value="comedia">Comédia</option>
-            <option value="danca">Dança</option>
-            <option value="desenho">Desenho</option>
-            <option value="documentario">Documentário</option>
-            <option value="drama">Drama</option>
-            <option value="espionagem">Espionagem</option>
-            <option value="fantasia">Fantasia</option>
-            <option value="faroeste">Faroeste</option>
-            <option value="ficcao">Ficção</option>
-            <option value="guerra">Guerra</option>
-            <option value="musical">Musical</option>
-            <option value="policial">Policial</option>
-            <option value="romance">Romance</option>
-            <option value="seriado">Seriado</option>
-            <option value="suspense">Suspense</option>
-            <option value="terror">Terror</option>
-        </select>
-    </div>
-    <div>
-        <label for="sinopse">Sinopse:</label>
-        <textarea id="sinopse" cols="100" rows="10"></textarea>
-    </div>
+        <div id="mensagem" class="ocultarMsg">
+            <img src="img/close-msg.svg" class="imagemMensagem" title="Fechar as mensagens de erro." onclick="fecharMensagem()" />
+            <div id="textoDaMensagem"></div>
+        </div>
 
-    <button id="btnSalvar" onclick="filme.salvar()">Salvar</button>
-    <button id="btnLimpar" onclick="filme.limpar()">Limpar</button>
+        <div>
+            <label for="filme"> *Filme: </label>
+            <select id="filme" size="1" title="Campo obrigatório" autofocus required="true">
+                <option value="" selected>Selecione um filme</option>
+            </select>
+        </div>
+        <div>
+            <label for="sala"> *Sala: </label>
+            <select id="sala" size="1" title="Campo obrigatório" required>
+                <option value="" selected>Selecione uma sala</option>
+            </select>
+        </div>
+        <div>
+            <label for="linguagem"> *Linguagem: </label>
 
-    <section>
-        <h2>Filmes Cadastrados (
-            <small>
-                <i>
-                    <b>
-                        <span id="qtde">0</span>
-                    </b>
-                </i>
-            </small>)
-        </h2>
+            <label for="dublado" class="label3d2d">Dublado</label>
+            <input type="radio" name="linguagem" id="dublado" value="Dublado" required />
 
-        <table id="tdados">
-            <thead>
-                <th>Filme</th>
-                <th>Duração</th>
-                <th></th>
-                <th></th>
-            </thead>
-            <tbody id="tbody"></tbody>
-        </table>
-    </section>
+            <label for="legendado" class="label3d2d">Legendado</label>
+            <input type="radio" name="linguagem" id="legendado" value="Legendado" required />
+        </div>
+        <div>
+            <label for="iamgem"> *Imagem: </label>
 
-    <p>
-        <hr>
-        <footer style="text-align: center">
-            <small>
-                <i>
-                    <span>Desenvolvido por Thiago Soares Figueiredo</span>
-                </i>
-            </small>
-        </footer>
-    </p>
+            <label for="2d" class="label3d2d"> 2D </label>
+            <input type="radio" name="imagem" id="2d" value="2D" required />
+
+            <label for="3d" class="label3d2d"> 3D </label>
+            <input type="radio" name="imagem" id="3d" value="3D" required />
+        </div>
+        <div>
+            <label for="data"> *Data: </label>
+            <input type="date" id="data" title="Campo obrigatório" required />
+        </div>
+        <div>
+            <label for="horario"> *Horário: </label>
+            <input type="time" id="horario" title="Campo obrigatório" required />
+        </div>
+        <div id="msgCampoObrigatorio">
+            Os campos marcados com (*) são obrigatórios
+        </div>
+
+        <button id="btnSalvar" onclick="sessao.salvar()">Salvar</button>
+        <button id="btnLimpar" onclick="sessao.limparCampos()">Limpar</button>
+
+        <section>
+            <div>
+                <h2>Sessões Cadastradas
+                    <span id="qtde"></span>
+                </h2>
+            </div>
+
+            <table id="tdados">
+                <thead>
+                    <th>Filme</th>
+                    <th>Data</th>
+                    <th>Início</th>
+                    <th>Linguagem</th>
+                    <th>Sala</th>
+                    <th>Imagem</th>
+                    <th></th>
+                    <th></th>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </section>
+
+        <p>
+            <hr>
+            <footer style="text-align: center">
+                <small>
+                    <i>
+                        <span>Desenvolvido por Thiago Soares Figueiredo</span>
+                    </i>
+                </small>
+            </footer>
+        </p>
+    </main>
 </body>
 
 </html>
