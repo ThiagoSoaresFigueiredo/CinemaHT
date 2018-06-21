@@ -4,13 +4,27 @@ class Login {
         this.listaDeRegistros = [];
         this.login = {};
         this.msg = "";
+
     } // construtor
 
     carregarDados() {
         this.listaDeRegistros = JSON.parse(localStorage.getItem("registros"));
+
+        this.hasUsuarios(); // Verifica registros do localStorage
     } // carregarDados()
 
-    verificarLogin() {
+    hasUsuarios() {
+        if(this.listaDeRegistros == null) {
+            this.msg = "ATENÇÃO: não existe usuário cadastrado no sistema. \n Cadastre um novo ou " +
+                "entre com o Usuário: teste e Senha: teste para logar no sistema";
+            this.mostrarMensagensDeErros();
+        } else {
+            this.msg = "";
+            this.ocultarMensagensDeErros();
+        }
+    }
+
+    logar() {
         this.lerDados();
 
         console.log(this.msg)
@@ -19,33 +33,37 @@ class Login {
             let senhaDoUsuario = "";
             let loginValido = {};
 
-            for (let i = 0; i < this.listaDeRegistros.length; i++) {
-                if (this.listaDeRegistros[i].usuario == this.login.usuario) {
-                    nomeDoUsuario = this.listaDeRegistros[i].usuario;
-                    loginValido.usuario = nomeDoUsuario;
-                }
+            if (this.listaDeRegistros != null) {
+                for (let i = 0; i < this.listaDeRegistros.length; i++) {
+                    if (this.listaDeRegistros[i].usuario == this.login.usuario) {
+                        nomeDoUsuario = this.listaDeRegistros[i].usuario;
+                        loginValido.usuario = nomeDoUsuario;
+                    }
 
-                if (this.listaDeRegistros[i].senha == this.login.senha)
-                    senhaDoUsuario = this.listaDeRegistros[i].senha;
-            } // for
+                    if (this.listaDeRegistros[i].senha == this.login.senha)
+                        senhaDoUsuario = this.listaDeRegistros[i].senha;
+                } // for
 
-            if (nomeDoUsuario == "" || senhaDoUsuario == "") {
-                if (nomeDoUsuario == "" && senhaDoUsuario == "") {
-                    this.msg += "Usuário e senha inválidos \n";
+                if (nomeDoUsuario == "" || senhaDoUsuario == "") {
+                    if (nomeDoUsuario == "" && senhaDoUsuario == "") {
+                        this.msg += "Usuário e senha inválidos \n";
+                    } else {
+                        if (nomeDoUsuario == "")
+                            this.msg += "Usuário inválido \n";
+
+                        if (senhaDoUsuario == "")
+                            this.msg += "Senha inválida \n";
+                    }
+
+                    this.mostrarMensagensDeErros();
                 } else {
-                    if (nomeDoUsuario == "")
-                        this.msg += "Usuário inválido \n";
-
-                    if (senhaDoUsuario == "")
-                        this.msg += "Senha inválida \n";
-                }
-
-                this.mostrarMensagensDeErros();
+                    this.armazenarUsuarioLogado(loginValido);
+                    window.location.href = "home.html";
+                } // else
             } else {
-                this.armazenarUsuarioLogado(loginValido);
-                window.location.href = "home.html";
+                
             }
-        }
+        } // if
     } // verificarLogin()
 
     lerDados() {
@@ -75,6 +93,12 @@ class Login {
         let divMensagem = document.getElementById("textoDaMensagem");
         divMensagem.innerText = this.msg;
         document.getElementById("mensagem").classList.add("mostrarMsg");
+    }
+
+    ocultarMensagensDeErros() {
+        let divMensagem = document.getElementById("textoDaMensagem");
+        divMensagem.innerText = this.msg;
+        document.getElementById("mensagem").classList.add("ocultarMsg");
     }
 } // classe principal
 

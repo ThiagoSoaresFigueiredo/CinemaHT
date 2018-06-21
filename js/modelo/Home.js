@@ -1,27 +1,36 @@
 class Home {
 
     constructor() {
-        this.usuario = "";
+        this.usuario = {};
     } // construtor()
 
     carregarUsuarioLogado() {
-        let usuario = JSON.parse(localStorage.getItem("usuario"));
-        this.usuario = usuario.usuario;
+        this.usuario = JSON.parse(localStorage.getItem("usuario"));
 
+        if (this.usuario == null) {
+            window.location.href = "login.html";
+        } // if
     } // Fim de carregarUsuarioLogado()
-    
+
     buscarDados() {
-        this.carregarUsuarioLogado();        
+        this.carregarUsuarioLogado();
         this.montarTela();
     } // buscarDados()
-    
+
     montarTela() {
-        if (usuarioLogado == null) {
-            document.getElementById("usuarioLogado").innerHTML = "Usuário:<br/>&nbsp;&nbsp;&nbsp;&nbsp;<b> Seja bem-vindo ao Sistema Cinema HT </b>"
-        } else {
-            document.getElementById("usuarioLogado").innerHTML = "Usuário:<br/>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + usuarioLogado + "</b>"
-        } // else
+        let telaBoasVindas = document.getElementById("tela");
+        if (telaBoasVindas != null) {
+            telaBoasVindas.innerHTML = "Olá " + this.usuario.usuario + ", seja bem vindo(a).";
+        }
+        document.getElementById("usuarioLogado").innerHTML = "Usuário:<br/>&nbsp;&nbsp;&nbsp;&nbsp;<b>" + this.usuario.usuario + "</b>";
     } // montarTela()
+
+    logOut() {
+        if (window.confirm("Sair do sistema ?")) {
+            localStorage.removeItem("usuario");
+            window.location.href = "login.html";
+        }
+    } // logOut()
 } // Fim da classe
 
 var home = new Home();

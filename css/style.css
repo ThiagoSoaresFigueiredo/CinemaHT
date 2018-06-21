@@ -189,12 +189,12 @@ button {
     cursor: pointer;
 }
 
-.ocultarMsg {
-    display: none;
-}
-
 #mensagem {
     margin-left: 10px;
+}
+
+.ocultarMsg {
+    display: none;
 }
 
 .mostrarMsg {
@@ -255,8 +255,6 @@ button {
     cursor: auto;
 }
 
-.liberarCadeira {}
-
 #bloco-de-cadeiras {
     width: 90%;
     margin: auto;
@@ -273,4 +271,26 @@ button {
 
 .mostrar-cadeiras {
     display: block;
+}
+
+#tela {
+    width: 90%;
+    text-align: left;
+    margin: 0px;
+    padding: 0px;
+    font-size: x-small;
+    color: blue;
+}
+
+#emCartaz {
+    display: inline;
+}
+
+#imgCartaz01 {
+    width: 10%;
+}
+
+#cartaz01 span {
+    text-align: center;
+    display: inline-block;
 }

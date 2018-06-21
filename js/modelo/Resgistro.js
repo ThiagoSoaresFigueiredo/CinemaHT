@@ -2,9 +2,8 @@ class Resgistro {
 
     constructor() {
         this.registros = [];
-        this.qtd;
-        this.isEdicao = false;
-        this.idEdicao;
+        this.registro = {};
+        this.msg = "";
     } // costrutor()
 
     carregarDados() {
@@ -13,66 +12,122 @@ class Resgistro {
 
         if (listaDeRegistros) {
             this.registros = listaDeRegistros;
-        }
+        } // if
     } // carregarDados()
 
     salvarDados() {
-        let registrosJson = JSON.stringify(this.registros);
-        localStorage.setItem("registros", registrosJson);
+        localStorage.setItem("registros", JSON.stringify(this.registros));
     } // salvarDados()
 
-    salvar() { // SALVAR
-        if (this.isEdicao) {
-            this.editar();
+    lerDados() {
+        let nome = document.getElementById("nome").value;
+        let email = document.getElementById("email").value;
+        let usuario = document.getElementById("usuario").value;
+        let senha = document.getElementById("senha").value;
+        let resenha = document.getElementById("resenha").value;
+
+        this.registro.nome = nome;
+        this.registro.email = email;
+        this.registro.usuario = usuario;
+        this.registro.senha = senha;
+        this.registro.resenha = resenha;
+
+        if (this.validarDados(this.registro)) {
+            return true;
         } else {
-            let nome = document.getElementById("nome").value;
-            let email = document.getElementById("email").value;
-            let usuario = document.getElementById("usuario").value;
-            let senha = document.getElementById("senha").value;
-            let resenha = document.getElementById("resenha").value;
-            let msg = "";
-
-            if (nome == "")
-                msg += "Nome é obrigatório\n";
-
-            if (email == "")
-                msg += "Email é obrigatório\n";
-
-            if (usuario == "")
-                msg += "Usuário é obrigatório\n";
-
-            if (senha == "")
-                msg += "Senha é obrigatória\n";
-
-            if (resenha == "")
-                msg += "Confirmar a senha é obrigatório\n";
-
-            if (msg == "") {
-                if (window.confirm("Tem certeza que deseja salvar os dados informado ?")) {
-                    let registro = {};
-                    registro.nome = nome;
-                    registro.email = email;
-                    registro.usuario = usuario;
-                    registro.senha = senha;
-
-                    this.registros.push(registro);
-                    this.salvarDados();
-                    this.limparCampos();
-
-                    window.alert("Usuário cadastrado com sucesso");
-                    window.location.href = "login.html";
-                }
-            } else {
-                let divMensagem = document.getElementById("textoDaMensagem");
-                divMensagem.innerText = msg;
-                document.getElementById("mensagem").classList.add("mostrarMsg");
-            }
+            return false;
         }
+    }
+
+    validarDados(registro) {
+        this.msg = "";
+
+        if (registro.nome == "")
+            this.msg += "Nome é obrigatório \n";
+
+        if (registro.email == "")
+            this.msg += "Email é obrigatório \n";
+
+        if (registro.usuario == "")
+            this.msg += "Usuário é obrigatório \n";
+
+        if (registro.senha == "")
+            this.msg += "Senha é obrigatória \n";
+
+        if (registro.resenha == "")
+            this.msg += "Confirmar a senha é obrigatório \n";
+
+        if (this.temMensagens()) {
+            return false;
+        } else {
+            return true;
+        }
+    } // Fim de validarDados()
+
+    temMensagens() {
+        if (this.msg == "") {
+            this.ocultarMsg();
+            return false;
+        } else {
+            this.mostrarMsg();
+            return true;
+        }
+    } // Fim de validarMensagens()
+
+    salvar() { // SALVAR
+        if (this.lerDados()) {
+            if (this.verificarEmail()) {
+                if (this.verficarSenha()) {
+                    if (window.confirm("Tem certeza que deseja salvar os dados informados ?")) {
+                        this.salvarDados();
+                        this.limparCampos();
+                    } // if
+                } // if
+            } // if
+        } else {
+            this.temMensagens();
+        } // else
     } // salvar()
 
-    editar() {
+    verificarEmail() {
+        this.msg = "";
 
-    } // editar()
+        for (let i = 0; i < this.registros.length; i++) {
+            if (document.getElementById("email").value == this.registros[i].email) {
+                this.msg = "Email informado já cadastrado \n";
+                this.temMensagens();
+                return false;
+            } // if
+        } // for
+
+        return true;
+    } // Fim de verificarEmail()
+
+    verficarSenha() {
+        this.msg = "";
+
+        if (document.getElementById("senha").value == document.getElementById("resenha").value) {
+            this.temMensagens();
+            return true;
+        } else {
+            this.msg += "Senha e confirmação de senha devem ser iguais";
+            this.mostrarMsg();
+            return false;
+        } // else
+    } // Fim de verficarSenha()
+
+    mostrarMsg() {
+        let divMensagem = document.getElementById("textoDaMensagem");
+        divMensagem.innerText = this.msg;
+        document.getElementById("mensagem").classList.add("mostrarMsg");
+    } // Fim de mostrarMsg()
+
+    ocultarMsg() {
+        document.getElementById("textoDaMensagem").innerHTML = "";
+        document.getElementById("textoDaMensagem").innerText = "";
+        this.msg = "";
+        document.getElementById("mensagem").classList.remove("mostrarMsg");
+    } // Fim de ocultarMsg()
 
     limparCampos() {
         document.getElementById("nome").value = "";
@@ -80,7 +135,21 @@ class Resgistro {
         document.getElementById("usuario").value = "";
         document.getElementById("senha").value = "";
         document.getElementById("resenha").value = "";
+
+        this.registro = {};
+        this.msg = "";
+        this.mostrarMsg();
     }
+
+    contarRegistros() {
+        let qtd = 0;
+
+        for (let i = 0; i < this.registros.length; i++) {
+            qtd++;
+        } // for
+
+        return qtd;
+    } // Fim de contarRegistros()
 } // Fim da classe
 
 var registro = new Resgistro();

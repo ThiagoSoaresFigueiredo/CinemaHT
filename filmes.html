@@ -12,10 +12,11 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/modelo/Filmes.js"></script>
+    <script src="js/modelo/Home.js"></script>
     <script src="js/modelo/Utils.js"></script>
 </head>
 
-<body onload="filme.carregarDados()">
+<body onload="filme.carregarDados(); home.buscarDados();">
     <nav class="centro">
         <h2 class="centro">
             <a href="home.html">Cinema HT</a>
@@ -41,7 +42,7 @@
                 <a href="filmes.html">Filmes</a>
             </li>
             <li>
-                <a href="login.html">Sair</a>
+                <a onclick="home.logOut()">Sair</a>
                 <div id="usuarioLogado">Nenhum usuário logado</div>
             </li>
         </ul>

@@ -9,22 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Cinema HT - Login</title>
+    <title>Cinema HT - Recuperação de Senha</title>
 
     <link rel="stylesheet" href="css/login.css">
 
-    <script src="js/modelo/Login.js"></script>
+    <script src="js/modelo/RecuperarSenha.js"></script>
     <script src="js/modelo/Utils.js"></script>
 </head>
 
-<body onload="login.carregarDados()">
+<body onload="recuperarSenha.carregarDados()">
     <div id="login">
         <div>
-            <img src="https://res.cloudinary.com/hashnode/image/upload/v1495178101/fhv2hc8cy1pykb6c5ii5.png">
+            <img src="https://cdn.icon-icons.com/icons2/37/PNG/512/password_3715.png">
         </div>
 
         <div>
-            <h1> Log-in </h1>
+            <h1> Recover </h1>
         </div>
 
         <div id="mensagem" class="ocultarMsg">
@@ -33,19 +33,21 @@
         </div>
 
         <div>
-            <input id="usuario" type="text" placeholder="Usuário" required autofocus />
+            <input id="email" type="email" title="Informe o email do usuário" placeholder="Email do usuário cadastrado" required autofocus
+            />
+        </div>
+        <div id="exibirSenha" class="ocultarCampoSenha">
+            <img src="img/close-msg.svg" class="imagemMensagem" title="Fechar" onclick="recuperarSenha.fecharSenha()" />
+            <div id="textoDaSenha"></div>
         </div>
         <div>
-            <input id="senha" type="password" placeholder="Senha" required />
-        </div>
-        <div>
-            <button onclick="login.logar()"> Logar </button>
+            <button onclick="recuperarSenha.recuperar()" title="Mostra a senha do usuário na tela"> Mostrar senha </button>
         </div>
 
         <div id="register">
             <a href="register.html" title="Cadastrar um novo usuário">Cadastrar</a>
             |
-            <a href="recuperar_senha.html" title="Recuperar a senha de um usuário">Recuperar senha</a>
+            <a href="login.html" title="Ir para a página de login">Login</a>
         </div>
     </div>
 </body>

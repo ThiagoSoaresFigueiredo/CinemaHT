@@ -9,13 +9,14 @@
     <title>Clientes</title>
 
     <script src="js/modelo/Clientes.js"></script>
+    <script src="js/modelo/Home.js"></script>
     <script src="js/modelo/Utils.js"></script>
 
     <link rel="stylesheet" href="css/clientes.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body onload="cliente.carregarDados();">
+<body onload="cliente.carregarDados(); home.buscarDados();">
 
     <nav class="centro">
         <h2 class="centro">
@@ -42,7 +43,7 @@
                 <a href="filmes.html">Filmes</a>
             </li>
             <li>
-                <a href="login.html">Sair</a>
+                <a onclick="home.logOut()">Sair</a>
                 <div id="usuarioLogado">Nenhum usuário logado</div>
             </li>
         </ul>

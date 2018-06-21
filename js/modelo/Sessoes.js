@@ -16,12 +16,9 @@ class Sessoes {
     gerarAssentos() {
         this.cadeira.ocupado = false;
 
-        for(let i = 0; i < 60; i++) {
+        for (let i = 0; i < 60; i++) {
             this.cadeiras.push(this.cadeira);
-        }
-        console.log(this.cadeiras);
-        
-        // this.cadeiras.push(fileira);
+        } // for
     } // Fim de gerarAssentos
 
     carregarUsuarioLogado() {
