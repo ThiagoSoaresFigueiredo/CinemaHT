@@ -65,6 +65,8 @@ class Resgistro {
     } // Fim de validarDados()
 
     temMensagens() {
+        console.log("temMensgens()");
+
         if (this.msg == "") {
             this.ocultarMsg();
             return false;
@@ -79,8 +81,11 @@ class Resgistro {
             if (this.verificarEmail()) {
                 if (this.verficarSenha()) {
                     if (window.confirm("Tem certeza que deseja salvar os dados informados ?")) {
+                        this.registros.push(this.registro);
                         this.salvarDados();
                         this.limparCampos();
+
+                        window.alert("Registro salvo com sucesso");
                     } // if
                 } // if
             } // if
@@ -138,7 +143,6 @@ class Resgistro {
 
         this.registro = {};
         this.msg = "";
-        this.mostrarMsg();
     }
 
     contarRegistros() {

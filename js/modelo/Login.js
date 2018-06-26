@@ -27,7 +27,6 @@ class Login {
     logar() {
         this.lerDados();
 
-        console.log(this.msg)
         if (this.msg == "") {
             let nomeDoUsuario = "";
             let senhaDoUsuario = "";
@@ -68,6 +67,7 @@ class Login {
 
     lerDados() {
         this.msg = "";
+
         let usuario = document.getElementById("usuario").value;
         let senha = document.getElementById("senha").value;
 
