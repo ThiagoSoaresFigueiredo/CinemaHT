@@ -103,7 +103,6 @@ class Reserva {
         this.listarCadeiras();
 
         let comboSessaoSelecionado = document.getElementById("sessao").selectedIndex;
-        console.log(comboSessaoSelecionado);
 
         let temReserva = false;
         for (let i = 0; i < 60; i++) {
