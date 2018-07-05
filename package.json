@@ -1,0 +1,32 @@
+{
+  "name": "CinemaHT",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "http": "^0.0.0",
+    "http-server": "^0.11.1",
+    "lite-server": "^2.4.0",
+    "mongoose": "^5.2.1",
+    "nodemon": "^1.17.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon src/bin/Server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThiagoSoaresFigueiredo/CinemaHT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThiagoSoaresFigueiredo/CinemaHT/issues"
+  },
+  "homepage": "https://github.com/ThiagoSoaresFigueiredo/CinemaHT#readme"
+}
