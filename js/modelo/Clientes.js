@@ -1,3 +1,7 @@
+'use strict';
+
+const url = "http://localhost:4000/clientes";
+
 class Cliente {
 
     constructor() {
@@ -22,28 +26,57 @@ class Cliente {
     carregarDados() {
         this.carregarUsuarioLogado();
 
-        if (this.clientes = JSON.parse(localStorage.getItem("clientes"))) {
-            this.listar();
-        } else {
-            this.clientes = [];
-        } // else
+        // if (this.clientes = JSON.parse(localStorage.getItem("clientes"))) {
+        //     this.listar();
+        // } else {
+        //     this.clientes = [];
+        // } // else
+
+        ////// API
+        this.clientes = JSON.parse(this.fazerRequest("GET", url, null));
+        this.listar();
+
     } // Fim de carregarDados()
 
+    fazerRequest(method, URL, body) {
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open(method, URL, false);
+
+        if (body == null) {
+            xhttp.send();
+        } else {
+            xhttp.setRequestHeader("Content-type", "application/json");
+            xhttp.send(body);
+        }
+
+        if (xhttp.status == 200) {
+            return xhttp.response;
+        }
+
+        return null;
+    }
+
     salvarDados() {
-        if (this.clientes.length > 0) {
-            localStorage.setItem("clientes", JSON.stringify(this.clientes));
-        } // if
+        // if (this.clientes.length > 0) {
+        //     localStorage.setItem("clientes", JSON.stringify(this.clientes));
+        // } // if
+
+        ///// API
+        this.fazerRequest("POST", url, JSON.stringify(this.cliente));
     } // Fim de salvarDados()
 
     listar() { // LISTAR
         let tabela = document.querySelector("#corpoTabela");
         tabela.innerHTML = "";
 
+        let id = 0;
         this.qtd = 0;
 
         if (this.clientes.length > 0) {
             for (let i = 0; i < this.clientes.length; i++) {
                 if (this.clientes[i]) {
+                    id = this.clientes[i]._id;
                     this.qtd++;
 
                     let linha = tabela.insertRow();
@@ -67,13 +100,13 @@ class Cliente {
                     imgExcluir.src = "img/excluir.svg";
                     imgExcluir.title = "Excluir";
                     imgExcluir.classList.add("icone");
-                    imgExcluir.setAttribute("onclick", "cliente.excluir('" + i + "')");
+                    imgExcluir.setAttribute("onclick", "cliente.excluir('" + id + "')");
 
                     let imgEditar = document.createElement("img");
                     imgEditar.src = "img/editar.svg";
                     imgEditar.title = "Editar";
                     imgEditar.classList.add("icone");
-                    imgEditar.setAttribute("onclick", "cliente.editar('" + i + "')");
+                    imgEditar.setAttribute("onclick", "cliente.editar('" + id + "')");
 
                     colunaEditar.appendChild(imgEditar);
                     colunaExcluir.appendChild(imgExcluir);
@@ -91,10 +124,9 @@ class Cliente {
 
             if (this.msg == "") {
                 if (window.confirm("Tem certeza que deseja salvar os dados informados ?")) {
-                    this.clientes.push(this.cliente);
+                    this.salvarDados();
                     this.limparCampos();
                     this.listar();
-                    this.salvarDados();
 
                     window.alert("Registro salvo com sucesso");
                 } else {
@@ -108,7 +140,10 @@ class Cliente {
 
     excluir(i) { // EXCLUIR 
         if (window.confirm("Tem certeza que deseja excluir este registro ?")) {
-            this.clientes.splice(i, 1);
+            let clienteParaExcluir = {
+                _id: i
+            }
+            this.fazerRequest("DELETE", url, JSON.stringify(clienteParaExcluir));
             this.listar();
             this.salvarDados();
             window.alert("Registro excluído com sucesso");
